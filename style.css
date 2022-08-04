@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: azure;
+}
+
+.scores {
+    display: flex;
+    gap: 2rem;
+    border: solid black;
+    padding: 1rem 2rem;
+    font-size: 24px;
+}
+
+#results {
+    margin: 1rem 1rem;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+button {
+    font-size: 20px;
+}
