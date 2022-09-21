@@ -1,60 +1,10 @@
-function getComputerChoice() {
-    const randomNumber = Math.floor(Math.random() * 3);
-    switch (randomNumber) {
-        case 0:
-            return "rock";
-        case 1:
-            return "paper";
-        case 2:
-            return "scissors";
-    }
-};
-
-var playerScore = 0;
-var computerScore = 0;
-
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-            
-        results.textContent = "It's a tie!";
-        player.textContent = `You: ${playerScore}`;
-        computer.textContent = `Computer: ${computerScore}`;
-         
-    } else if (playerSelection === "rock" && computerSelection === "paper" 
-        || playerSelection === "paper" && computerSelection === "scissors" 
-        || playerSelection === "scissors" && computerSelection === "rock") {
-        computerScore++;
-        results.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
-        player.textContent = `You: ${playerScore}`;
-        computer.textContent = `Computer: ${computerScore}`;
-    
-    } else {
-        playerScore++;
-        results.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
-        player.textContent = `You: ${playerScore}`;
-        computer.textContent = `Computer: ${computerScore}`;
-    };
-
-    if (playerScore === 5) {
-        results.textContent = "You Win! Game Over!";
-        playerScore = 0;
-        computerScore = 0;
-    };
-
-    if (computerScore === 5) {
-        results.textContent = "Computer Wins! Game Over!";
-        playerScore = 0;
-        computerScore = 0;
-    };
-};
-
-const rock = document.querySelector('#rock'); 
-const paper = document.querySelector('#paper'); 
-const scissors = document.querySelector('#scissors');
-const results = document.querySelector('#results');
+const buttons = document.querySelectorAll('button');
+const resultsTop = document.querySelector('#results-top');
+const resultsBottom = document.querySelector('#results-bottom');
 const player = document.querySelector('#player');
 const computer = document.querySelector('#computer');
-const buttons = document.querySelectorAll('button');
+let playerScore = 0;
+let computerScore = 0;
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -62,15 +12,51 @@ buttons.forEach((button) => {
     } )
 })
 
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        resultsTop.textContent = "It's a tie!";
+        resultsBottom.textContent = `${computerSelection} - ${playerSelection}`;
+         
+    } else if (playerSelection === "Rock" && computerSelection === "Paper" 
+        || playerSelection === "Paper" && computerSelection === "Scissors" 
+        || playerSelection === "Scissors" && computerSelection === "Rock") {
+        computerScore++;
+        resultsTop.textContent = "You Lose!" ;
+        resultsBottom.textContent = `${computerSelection} beats ${playerSelection}`;
 
-// rock.addEventListener('click', function () {
-//     playRound('rock', getComputerChoice());
-// });
+    } else {
+        playerScore++;
+        resultsTop.textContent = "You Win!"
+        resultsBottom.textContent = `${playerSelection} beats ${computerSelection}`;
+    };
 
-// paper.addEventListener('click', function () {
-//     playRound('paper', getComputerChoice());
-// });
+    player.textContent = `You: ${playerScore}`;
+    computer.textContent = `Computer: ${computerScore}`;
 
-// scissors.addEventListener('click', function () {
-//     playRound('scissors', getComputerChoice());
-// });
+    if (playerScore === 5 || computerScore === 5) {
+        gameOver();
+    }
+};
+
+function getComputerChoice() {
+    const randomNumber = Math.floor(Math.random() * 3);
+    switch (randomNumber) {
+        case 0:
+            return "Rock";
+        case 1:
+            return "Paper";
+        case 2:
+            return "Scissors";
+    }
+};
+
+function gameOver() {
+    resultsTop.textContent = "Game Over!"
+    resultsBottom.textContent = `${playerScore} - ${computerScore}`;
+    resetScore();
+};
+
+function resetScore() {
+    playerScore = 0;
+    computerScore = 0;
+};
